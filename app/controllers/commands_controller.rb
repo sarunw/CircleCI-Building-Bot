@@ -18,6 +18,6 @@ class CommandsController < ApplicationController
     end
 
     def command_params
-      params.permit(:text, :token, :response_url, :user_id)
+      params.permit(:text, :token, :response_url, :user_id, :command)
     end
 end
