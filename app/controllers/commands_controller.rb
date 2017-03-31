@@ -1,10 +1,13 @@
+require "commands"
+
 class CommandsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
     return render json: {}, status: 403 unless valid_slack_token?
 
-    CommandWorker.perform_async(command_params.to_h)
+    CommandWorker.perform_async(command_params)
+
     render json: { 
       response_type: "in_channel",
       text: "Done"

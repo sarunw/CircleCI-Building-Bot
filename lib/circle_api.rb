@@ -18,7 +18,7 @@ class CircleApi
         query: {
           "circle-token": @circleci_token
         },
-        headers: { 'Content-Type: application/json', 'Accept: application/json'} 
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json'} 
       }
     )
   end

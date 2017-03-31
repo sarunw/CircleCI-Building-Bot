@@ -11,6 +11,8 @@
 # text=83864
 # response_url=https://hooks.slack.com/commands/1234/5678
 
+require "circle_api"
+
 module Commands
   module Processor
     extend self
@@ -20,10 +22,10 @@ module Commands
       command = command(params).titleize
       
       # Call Commands:TaskName(params)
-      "Command::#{command}".constantize.new(params)
+      "Commands::#{command}".constantize.new(params)
     end
 
-    def command
+    def command(params)
       params[:command].scan(/\/(\w+)/).first.first
     end
 
@@ -43,20 +45,21 @@ module Commands
     end    
   end
 
-  module Build
+  class Build
     def initialize(params)
-      branch = branch(params)
+
+      @branch = branch(params)
 
       @api = CircleApi.new(ENV["ROCKY_CIRCLECI_API_TOKEN"])      
     end
 
     def run
-      response = @api.trigger_new_build(branch)
+      response = @api.trigger_new_build(@branch)
     end
 
     # Extract branch name from message
     def branch(params)
-      Processor.task(prams)
+      Processor.task(params)
     end
   end
 end
