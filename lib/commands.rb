@@ -1,6 +1,6 @@
 # Get this from calling /weather 83864
 
-# token=gIkuvaNzQIHg97ATvDxqgjtO
+ 
 # team_id=T0001
 # team_domain=example
 # channel_id=C2147483705
@@ -18,13 +18,13 @@ module Commands
     # /command task:subtask message
     def init(params)
       command = command(params).titleize
-
+      
       # Call Commands:TaskName(params)
       "Command::#{command}".constantize.new(params)
     end
 
     def command
-      params[:command].scan(/\/(\w+)/).first
+      params[:command].scan(/\/(\w+)/).first.first
     end
 
     # Given `task:sub message`, return task
