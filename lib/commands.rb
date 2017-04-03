@@ -47,9 +47,7 @@ module Commands
 
   class Build
     def initialize(params)
-
       @branch = branch(params)
-
       @api = CircleApi.new(ENV["ROCKY_CIRCLECI_API_TOKEN"])      
     end
 
