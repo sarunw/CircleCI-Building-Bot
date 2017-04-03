@@ -26,6 +26,7 @@ module Commands
     end
 
     def command(params)
+      puts "xxx #{params}"
       params[:command].scan(/\/(\w+)/).first.first
     end
 
